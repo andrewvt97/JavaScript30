@@ -27,16 +27,40 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    const isAdult = people.some(function(person) {
+      const currentYear = (new Date()).getFullYear(); // new Date.getFullYear gives you the current year
+      if(currentYear - person.year >= 19) {
+        return true;
+      }
+    });
+    console.log({isAdult}); 
     // Array.prototype.every() // is everyone 19 or older?
+    const allAdults = people.every( (person)  => { // simlar to above but with simplified syntax and using the every function
+      return new Date().getFullYear() - person.year >= 19;
+    });
 
+    console.log({allAdults});
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const comment = comments.find( comment => comment.id === 823423 ); // fancy one line version of the function
+    //   if(comment.id === 823423) {
+    //     return true;
+    //   }
+    // });
+    console.log(comment);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
-
+    const index = comments.findIndex( comment => comment.id === 823423);
+    console.log(index);
+    // comments.splice(index, 1); // removes item from array
+    const newComments = [ // the ... is the spread operator which takes everything from each array and puts it in the new array
+      ...comments.slice(0, index), // takes everything before the index
+      ...comments.slice(index + 1) // takes everything after the index
+    ];
+    console.table(comments); 
   </script>
 </body>
 </html>
